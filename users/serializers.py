@@ -36,5 +36,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+        user.following.add(user)
         Token.objects.create(user=user)
         return user
