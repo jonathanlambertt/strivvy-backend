@@ -15,3 +15,10 @@ def create_user(request):
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def follow_user(request, user_id):
+    current_user = request.user
+    user_to_follow = User.objects.get(id=user_id)
+    print(f'{current_user.username} wants to follow {user_to_follow.username}.')
+    return Response(status=status.HTTP_201_CREATED)
