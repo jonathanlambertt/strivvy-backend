@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.create_user),
     path('follow/<uuid:user_id>', views.follow_user),
     path('unfollow/<uuid:user_id>', views.unfollow_user),
-    path('login', drf_views.obtain_auth_token)
+    path('login', drf_views.obtain_auth_token),
+    path('search/', views.search_for_user)
 ]

@@ -6,7 +6,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 from .models import User
-from .serializers import CreateUserSerializer
+from .serializers import CreateUserSerializer, UserSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -44,3 +44,10 @@ def unfollow_user(request, user_id):
     current_user.following.remove(user_to_unfollow)
     current_user.save()
     return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def search_for_user(request):
+    query = request.GET.get('q', '')
+    users = User.objects.filter(username__icontains=query)
+    serializer = UserSerializer(users, many=True, context={'request': request})
+    return Response(serializer.data, status=status.HTTP_200_OK)

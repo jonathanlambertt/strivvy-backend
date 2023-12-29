@@ -39,3 +39,31 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.following.add(user)
         Token.objects.create(user=user)
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    is_following = serializers.SerializerMethodField()
+    is_searching_user = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'is_following', 'is_searching_user']  # Add more fields as needed
+
+    def get_is_following(self, obj):
+        request = self.context.get('request')
+        user = request.user if request else None
+
+        # Check if the current user is following the user in the serializer
+        if user and user.is_authenticated:
+            return user.following.filter(id=obj.id).exists()
+
+        return False
+    
+    def get_is_searching_user(self, obj):
+        request = self.context.get('request')
+        user = request.user if request else None
+
+        # Check if the user being searched is the same as the user performing the search
+        if user and user.is_authenticated:
+            return user.id == obj.id
+
+        return False
