@@ -16,8 +16,7 @@ def create_user(request):
         if user_serializer.is_valid():
             user_serializer.save()
             return Response(status=status.HTTP_201_CREATED)
-        else:
-            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def follow_user(request, user_id):
