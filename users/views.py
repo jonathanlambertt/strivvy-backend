@@ -6,7 +6,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 from .models import User
-from .serializers import CreateUserSerializer, UserSerializer
+from .serializers import CreateUserSerializer, UserSerializer, ProfileSerializer
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -50,3 +50,8 @@ def search_for_user(request):
     users = User.objects.filter(username__icontains=query)
     serializer = UserSerializer(users, many=True, context={'request': request})
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_profile(request):
+    serializer = ProfileSerializer(request.user)
+    return Response(serializer.data)

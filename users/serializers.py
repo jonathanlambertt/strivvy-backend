@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.core.validators import MaxLengthValidator
 
 from .models import User
+from posts.models import Post
 
 class CreateUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -67,3 +68,17 @@ class UserSerializer(serializers.ModelSerializer):
             return user.id == obj.id
 
         return False
+
+class ProfileSerializer(serializers.ModelSerializer):
+    post_count = serializers.SerializerMethodField()
+    following_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'post_count', 'following_count']
+    
+    def get_post_count(self, obj):
+        return Post.objects.filter(user=obj).count()
+
+    def get_following_count(self, obj):
+        return obj.following.exclude(pk=obj.pk).count()
