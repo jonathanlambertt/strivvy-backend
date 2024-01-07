@@ -9,5 +9,6 @@ urlpatterns = [
     path('unfollow/<uuid:user_id>', views.unfollow_user),
     path('login', drf_views.obtain_auth_token),
     path('search/', views.search_for_user),
-    path('profile', views.get_profile)
+    path('profile', views.get_profile),
+    path('feed', views.get_feed)
 ]

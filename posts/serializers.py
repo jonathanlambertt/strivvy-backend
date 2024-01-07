@@ -12,3 +12,11 @@ class PostSerializer(serializers.ModelSerializer):
         validated_data['user'] = self.context['request'].user
         post = Post.objects.create(**validated_data)
         return post
+
+class FeedPostSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    user_id = serializers.ReadOnlyField(source='user.id')
+
+    class Meta:
+        model = Post
+        fields = ('id', 'username', 'user_id', 'url', 'date', 'description', 'title', 'thumbnail', 'favicon', 'site_name')
