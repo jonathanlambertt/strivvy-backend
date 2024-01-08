@@ -29,7 +29,7 @@ def follow_user(request, user_id):
     if current_user.following.filter(id=user_id).exists():
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
-    curent_user.following.add(user_to_follow)
+    current_user.following.add(user_to_follow)
     current_user.save()
     return Response(status=status.HTTP_201_CREATED)
 
