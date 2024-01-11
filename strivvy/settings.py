@@ -26,7 +26,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.19', '192.168.1.19:8000', '192.168.1.153', '192.168.1.153:8000', '192.168.1.198', '192.168.1.198:8000']
+ALLOWED_HOSTS = ['192.168.1.19', '192.168.1.19:8000', '192.168.1.153', '192.168.1.153:8000', 
+                 '192.168.1.198', '192.168.1.198:8000', 'localhost', '64.23.160.16', 'strivvy.com']
 
 
 # Application definition
