@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'strivvy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': f'{os.environ.get("DB_PATH") if os.environ.get("DB_PATH") else BASE_DIR }/db.sqlite3',
     }
 }
 
