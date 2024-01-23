@@ -16,6 +16,7 @@ def create_post(request):
             post = serializer.save()
             request.user.distribute_post_to_followers(post.id)
             return Response(status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
@@ -44,6 +45,7 @@ def fetch_site_info(request):
         description = description['content'].strip() if description else ''
         favicon = soup.find('link', {'rel': 'icon'})
         favicon = favicon['href'].strip() if favicon else ''
+        print(favicon)
         site_name = soup.find('meta', {'property': 'og:site_name'})
         site_name = site_name['content'].strip() if site_name else ''
 

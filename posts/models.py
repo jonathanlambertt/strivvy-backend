@@ -10,7 +10,7 @@ class Post(models.Model):
     date = models.DateTimeField(default=datetime.now)
     description = models.CharField(max_length=255, blank=True, null=True, default="null")
     title = models.CharField(max_length=255, blank=True, null=True, default="null")
-    thumbnail = models.URLField(blank=True, null=True, default="null")
+    thumbnail = models.URLField(max_length=500, blank=True, null=True, default="null")
     favicon = models.URLField(blank=True, null=True, default="null")
     site_name = models.CharField(max_length=255, blank=True, null=True, default="null")
 
