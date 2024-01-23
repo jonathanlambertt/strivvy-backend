@@ -16,7 +16,6 @@ def create_post(request):
             post = serializer.save()
             request.user.distribute_post_to_followers(post.id)
             return Response(status=status.HTTP_201_CREATED)
-        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
