@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'posts.apps.PostsConfig',
+    'likes.apps.LikesConfig',
     'rest_framework.authtoken'
 ]
 

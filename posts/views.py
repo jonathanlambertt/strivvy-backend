@@ -39,12 +39,10 @@ def fetch_site_info(request):
         # Extract relevant information
         title = soup.find('meta', {'property': 'og:title'})
         title = title['content'].strip() if title else ''
-        #title = soup.title.text.strip() if soup.title else ''
         description = soup.find('meta', {'property': 'og:description'})
         description = description['content'].strip() if description else ''
         favicon = soup.find('link', {'rel': 'icon'})
         favicon = favicon['href'].strip() if favicon else ''
-        print(favicon)
         site_name = soup.find('meta', {'property': 'og:site_name'})
         site_name = site_name['content'].strip() if site_name else ''
 

@@ -64,5 +64,5 @@ def get_feed(request):
     posts = []
     for id in post_ids:
         posts.append(Post.objects.get(id=id))
-    serializer = FeedPostSerializer(posts, many=True)
+    serializer = FeedPostSerializer(posts, many=True, context={'request': request})
     return Response(serializer.data)
