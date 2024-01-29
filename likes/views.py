@@ -17,7 +17,8 @@ def create_like(request, post_id):
     
     like = Like(user=request.user, post=post)
     like.save()
-    return Response(status=status.HTTP_201_CREATED)
+    # return like_id so user can remove like if wanted
+    return Response({"like_id": like.id}, status=status.HTTP_201_CREATED)
 
 @api_view(['DELETE'])
 def delete_like(request, like_id):
